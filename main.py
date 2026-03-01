@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
 import httpx
+import json
 
 load_dotenv()
 
@@ -15,11 +16,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 @app.get("/")
 def home():
-    return {"message": "MoodTunes API is running"}
+    return {"message": "Moodify API is running"}
 
 @app.post("/recommend")
 async def recommend_songs(mood: str):
@@ -32,21 +33,22 @@ async def recommend_songs(mood: str):
         {{"title": "Song Name", "artist": "Artist Name"}}
     ]
     """
-    
     async with httpx.AsyncClient() as client:
         response = await client.post(
-           f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={GEMINI_API_KEY}",
+            "https://api.groq.com/openai/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {GROQ_API_KEY}",
+                "Content-Type": "application/json"
+            },
             json={
-                "contents": [{"parts": [{"text": prompt}]}]
+                "model": "llama-3.3-70b-versatile",
+                "messages": [{"role": "user", "content": prompt}],
+                "temperature": 0.7
             },
             timeout=30.0
         )
-    
     result = response.json()
-    print("GEMINI RESPONSE:", result)
-    
-    if "candidates" not in result:
-        return {"error": result}
-    
-    text = result["candidates"][0]["content"]["parts"][0]["text"]
-    return {"recommendations": text}
+    print("GROQ RESPONSE:", result)
+    text = result["choices"][0]["message"]["content"]
+    songs = json.loads(text)
+    return {"recommendations": songs}
