@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" type="image/png" href="Images/Favicon.png">
         <title>Moodify</title>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     </head>
     <body class="bg-black min-h-screen text-white">
         <div id="app" class="flex flex-col items-center justify-center min-h-screen">
-        <h1 class="text-6xl font-bold tracking-widest mb-4" style="background: linear-gradient(135deg, #fff 0%, #a78bfa 50%, #818cf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Moodify</h1>
+        <h1 class="text-6xl font-bold tracking-widest mb-4" style="background: linear-gradient(135deg, #fff 0%, #a78bfa 50%, #818cf8 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Moodify</h1>
         <hr>
         <p> Welcome to Moodify!</p>
         <p>Tell us what mood you're in today:</p>
-        <input type="text" placeholder="So, what's the mood today?">
-        <button>Find my Song</button>
+        <input type="text" placeholder= "So, what's the mood today?" class="bg-gray-800 text-white border border-purple-250 rounded-lg p-2 w-64 items-center justify-center mb-4">
+        <button style="font-size:14px; background:linear-gradient(white,rgba(167, 139, 250, 0.77) 0%, #6d7af6b4 100%); padding: 5px 10px; border-radius: 10px;">Find my Song</button>
         </div>
+        <footer style="position: fixed; bottom: 0; width: 100%; background:linear-gradient(135deg, #bfb1f6 0%, #6d7af6b4 100%); color: white; text-align: center; padding: 10px;">
+            &copy; 2026 Moodify.<bR> All rights reserved.<br>
+                Made with ❤️.
+        </footer>
     </body>
 
 </html>
