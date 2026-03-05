@@ -10,7 +10,7 @@ section {
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
-	background-color:black;
+	
 }
 
 .blob {
@@ -21,4 +21,7 @@ section {
 	&:nth-child(2) {
 	filter :blur(25px);
 	}
+}
+h1{
+	text-shadow: 2px 2px 5px #a96ffa(0, 0, 0, 0.5);
 }
