@@ -66,7 +66,7 @@ async def recommend_songs(mood: str):
                 results = itunes_data.get("results", [])
                 if results:
                     song["preview_url"] = results[0]["previewUrl"]
-                    song["album_art"] = results[0]["artworkUrl1600"]
+                    song["album_art"] = results[0]["artworkUrl100"]
                 else:
                     song["preview_url"] = None
                     song["album_art"] = None
