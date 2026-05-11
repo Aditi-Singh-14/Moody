@@ -6,32 +6,38 @@ by hope, duct tape, and CSS.
 <html>
     <head>
         <style>  /* This style section gives the blob a glow-up */
-            section {
-    position: fixed;
+            .section {
+                position: fixed;
+                top: 200px;
+                left: 200px;
+                width: calc(100% + 400px);
+                height: calc(100% + 400px);
+                z-index: -1;
+                pointer-events: auto;
+                overflow: hidden;
+            }
 
-    top: -200px;
-    left: -200px;
+            .blob {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 900px;
+                height: 900px;
+                filter: blur(60px);
+                opacity: 0.7;
+            }
 
-    width: calc(100% + 400px);
-    height: calc(100% + 400px);
+            .swiper{
 
-    z-index: 0;
-    pointer-events: auto;
-    overflow: visible;
-}
-
-.blob {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    width: 900px;
-    height: 900px;
-
-    filter: blur(60px);
-    opacity: 0.7;
-}
+                width: 100%;
+                height:400px;
+            }
+            .swiper-slide{
+                width: 200px;
+                padding: 0 40px;
+                display: flex;
+                }
         </style>
         <link rel="icon" href="/Images/Favicon2.png" type="image/png">  <!--favicon--> 
         <title>Moodify</title>
@@ -50,10 +56,15 @@ by hope, duct tape, and CSS.
         <p>Tell us what mood you're in today:</p>
         <input id="mood" type="text" placeholder="So, what's the mood today?" class="bg-gray-800 text-white border border-white-400 rounded-lg p-3 w-72 text-center focus:outline-none focus:ring-2 focus:ring-lightpurple-400 mb-4">
         <button onclick="findMySong()" class="text-black text-sm bg-gradient-to-r from-white via-purple-300 to-indigo-400 px-4 py-2 rounded-lg hover:scale-105 hover:shadow-lg transition duration-300">Find my Song</button>
-        <div id="cards"></div><!--Songs will append in these cards-->
+        <div class="swiper">
+            <div class="swiper-wrapper" id="cards"></div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div><!--Songs will append in these cards-->
         </div>
         <section>
-	      <!--- <div class="blob">
+	      <div class="blob">
 		    <svg viewBox="-100 -100 700 700" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" id="blobSvg">
 			    <defs>
 				    <linearGradient id="gradient">
@@ -65,7 +76,7 @@ by hope, duct tape, and CSS.
 				    	M438.5,322Q448,394,384,429.5Q320,465,263,425Q206,385,157,369Q108,353,86.5,301.5Q65,250,60,179Q55,108,131,112.5Q207,117,260.5,85.5Q314,54,374,85Q434,116,431.5,183Q429,250,438.5,322Z;
 					    M424,322.5Q449,395,387,437.5Q325,480,255.5,463Q186,446,152,396Q118,346,100.5,298Q83,250,96,199Q109,148,142.5,85Q176,22,251,19Q326,16,353,85.5Q380,155,389.5,202.5Q399,250,424,322.5Z;
                         M412.5,305.5Q402,361,350.5,381.5Q299,402,241.5,428Q184,454,158,395Q132,336,83,293Q34,250,52.5,185Q71,120,137.5,114.5Q204,109,254,96Q304,83,336.5,123.5Q369,164,396,207Q423,250,412.5,305.5Z;																																								 M436.5,313Q423,376,362.5,393Q302,410,245,425Q188,440,123,414.5Q58,389,54.5,319.5Q51,250,50.5,177.5Q50,105,116,72Q182,39,254,27.5Q326,16,363,78.5Q400,141,425,195.5Q450,250,436.5,313Z;
-						M404.5,310.5Q416,371,352.5,371Q289,371,233,422Q177,473,139,415.5Q101,358,76.5,304Q52,250,99.5,212.5Q147,175,172,130.5Q197,86,259.5,56.5Q322,27,342.5,97.5Q363,168,378,209Q393,250,404.5,310.5Z"></animate>--> <!--Blob animation. Do not question the blob. The blob has its reasons. -->
+						M404.5,310.5Q416,371,352.5,371Q289,371,233,422Q177,473,139,415.5Q101,358,76.5,304Q52,250,99.5,212.5Q147,175,172,130.5Q197,86,259.5,56.5Q322,27,342.5,97.5Q363,168,378,209Q393,250,404.5,310.5Z"></animate> <!--Blob animation. Do not question the blob. The blob has its reasons. -->
 			    </path>
 		    </svg>
 	    </div> 
@@ -99,10 +110,22 @@ by hope, duct tape, and CSS.
                         songelement.setAttribute('onclick', `playSong('${song.preview_url}')`);
                         songelement.innerHTML="<img src='" + song.album_art + "' >" + song.title + "-" + song.artist;
                         document.getElementById('cards').appendChild(songelement);
+                        songelement.className='swiper-slide'; // Add swiper-slide class to each song element
                     }
+                    new Swiper('.swiper',{
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                        pagination: {
+                            el: '.swiper-pagination',
+                            clickable: true,
+                        },
+                        navigation: {
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        }
+                    });
                 })
-                
-                }
+            }
         </script>
 
     </body>
