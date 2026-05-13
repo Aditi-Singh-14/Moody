@@ -15,15 +15,11 @@ by hope, duct tape, and CSS.
             align-items: center;
             overflow: visible;
             pointer-events: none;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center
         }
-        .blob {
-            position: absolute;
-            width: 1200px;
-            height: 1200px;
-            filter: blur(100px);
-            opacity: 0.75;
-            animation: floatBlob 12s ease-in-out infinite alternate;
-        }
+
         
         .swiper {
             width: 100%;
@@ -75,6 +71,9 @@ by hope, duct tape, and CSS.
         <p>Tell us what mood you're in today:</p>
         <input id="mood" onkeydown="if(event.key=='Enter')findMySong()" type="text" placeholder="So, what's the mood today?" class="bg-gray-800 text-white border border-white-400 rounded-lg p-3 w-72 text-center focus:outline-none focus:ring-2 focus:ring-lightpurple-400 mb-4">
         <button onclick="findMySong()" class="text-black text-sm bg-gradient-to-r from-white via-purple-300 to-indigo-400 px-4 py-2 rounded-lg hover:scale-105 hover:shadow-lg transition duration-300">Find my Song</button>
+        <div id="loading" style='display:none'>
+            <p> Finding your vibe....👀</p>
+        </div>
         <div class="swiper">
             <div class="swiper-wrapper" id="cards"></div>
             <div class="swiper-pagination"></div>
@@ -89,7 +88,8 @@ by hope, duct tape, and CSS.
                 Made with ❤️. 
             </footer>
         <script>
-            let currentAudio = null; // To keep track of the currently playing audio
+            let currentAudio = null;
+            let swiperInstance= null; // To keep track of the currently playing audio
             function playSong(previewUrl) {
                 if (currentAudio){
                     currentAudio.pause(); // Pause the currently playing audio
@@ -106,12 +106,22 @@ by hope, duct tape, and CSS.
                     currentAudio.pause(); // Pause any currently playing audio when a new search is made
                     currentAudio = null; // Reset the current audio reference
                 }
+                if (mood === null || mood.trim() === '') {
+                    alert("please enter a mood first!"); // Alert the user if the input is empty
+                    return; // If the input is empty, do nothing
+                }
+                document.getElementById('loading').style.display = 'block'; // Show loading message while fetching recommendations
                 fetch(`http://127.0.0.1:8000/recommend?mood=${mood}`, {
                     method: 'POST'
                 })
                 .then(response => response.json())
                 .then(data => {
+                    if (swiperInstance) {
+                        swiperInstance.destroy(); // Destroy the previous Swiper instance if it exists to prevent conflicts
+                        swiperInstance = null; // Reset the swiper instance reference
+                    }
                     document.getElementById('cards').innerHTML = ''; // Clear previous recommendations
+                    document.getElementById('loading').style.display = 'none'; // Hide loading message after fetching recommendations
                     const albumArts = [];
                     for (const song of data.recommendations) { // Loop through the recommended songs and create song cards
                         albumArts.push(song.album_art); // Store album art URLs in an array for later use (if needed) 
@@ -129,7 +139,7 @@ by hope, duct tape, and CSS.
                         document.getElementById('cards').appendChild(songelement);
                         songelement.className='swiper-slide'; // Add swiper-slide class to each song element
                     }
-                    new Swiper('.swiper',{ // Initialize Swiper after adding songs 
+                    swiperInstance = new Swiper('.swiper',{ // Initialize Swiper after adding songs 
                         slidesPerView: 3,
                         spaceBetween: 50,
                         centeredSlides: true,
@@ -146,16 +156,16 @@ by hope, duct tape, and CSS.
                         {
                             slideChange(swiper) { // Change background image based on the active slide's album art
                                 document.getElementById('BG').style.backgroundImage = `url(${albumArts[swiper.activeIndex]})`;
-                                document.getElementById('BG').style.backgroundSize = 'cover';
-                                document.getElementById('BG').style.backgroundPosition = 'center';
                                 document.getElementById('BG').style.filter = 'blur(5px)';
                             },
                             click(swiper) {
                                 swiper.slideTo(swiper.clickedIndex); // Slide to the clicked song card for better user experience}
                             }
-                    }});
+                        }
+                    });
+                    setTimeout(() => swiperInstance.update(), 100);
                     document.getElementById('BG').style.backgroundImage = `url(${albumArts[0]})`; // Set initial background image to the first song's album art
-                })
+                    })
             }
         </script>
 
