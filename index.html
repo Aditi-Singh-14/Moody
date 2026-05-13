@@ -5,7 +5,7 @@ by hope, duct tape, and CSS.
 -->
 <html>
     <head>
-        <style>  /* This style section gives the blob a glow-up */
+        <style>  /* This style section gives the website a glow-up */
         .section {
             position: fixed;
             inset: 0;
@@ -24,19 +24,7 @@ by hope, duct tape, and CSS.
             opacity: 0.75;
             animation: floatBlob 12s ease-in-out infinite alternate;
         }
-        @keyframes floatBlob {
-            0% {
-                transform: translate(-40px, -20px) scale(1);
-            }
-
-            50% {
-                transform: translate(30px, 40px) scale(1.08);
-        }
-
-        100% {
-                transform: translate(-20px, 10px) scale(0.95);
-        }
-        }
+        
         .swiper {
             width: 100%;
             max-width: 1100px;
@@ -85,7 +73,7 @@ by hope, duct tape, and CSS.
         <hr>
         <p> Welcome to Moodify!</p>
         <p>Tell us what mood you're in today:</p>
-        <input id="mood" type="text" placeholder="So, what's the mood today?" class="bg-gray-800 text-white border border-white-400 rounded-lg p-3 w-72 text-center focus:outline-none focus:ring-2 focus:ring-lightpurple-400 mb-4">
+        <input id="mood" onkeydown="if(event.key=='Enter')findMySong()" type="text" placeholder="So, what's the mood today?" class="bg-gray-800 text-white border border-white-400 rounded-lg p-3 w-72 text-center focus:outline-none focus:ring-2 focus:ring-lightpurple-400 mb-4">
         <button onclick="findMySong()" class="text-black text-sm bg-gradient-to-r from-white via-purple-300 to-indigo-400 px-4 py-2 rounded-lg hover:scale-105 hover:shadow-lg transition duration-300">Find my Song</button>
         <div class="swiper">
             <div class="swiper-wrapper" id="cards"></div>
@@ -114,6 +102,10 @@ by hope, duct tape, and CSS.
             //javascript code will be here
             function findMySong(){
                 const mood = document.getElementById('mood').value;
+                if(currentAudio){
+                    currentAudio.pause(); // Pause any currently playing audio when a new search is made
+                    currentAudio = null; // Reset the current audio reference
+                }
                 fetch(`http://127.0.0.1:8000/recommend?mood=${mood}`, {
                     method: 'POST'
                 })
@@ -150,12 +142,16 @@ by hope, duct tape, and CSS.
                             nextEl: '.swiper-button-next',
                             prevEl: '.swiper-button-prev',
                         },
-                        on: {
+                        on: 
+                        {
                             slideChange(swiper) { // Change background image based on the active slide's album art
                                 document.getElementById('BG').style.backgroundImage = `url(${albumArts[swiper.activeIndex]})`;
                                 document.getElementById('BG').style.backgroundSize = 'cover';
                                 document.getElementById('BG').style.backgroundPosition = 'center';
                                 document.getElementById('BG').style.filter = 'blur(5px)';
+                            },
+                            click(swiper) {
+                                swiper.slideTo(swiper.clickedIndex); // Slide to the clicked song card for better user experience}
                             }
                     }});
                     document.getElementById('BG').style.backgroundImage = `url(${albumArts[0]})`; // Set initial background image to the first song's album art
