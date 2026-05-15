@@ -17,7 +17,7 @@ by hope, duct tape, and CSS.
             pointer-events: none;
             background-repeat: no-repeat;
             background-size: cover;
-            background-position: center
+            background-position: center;
         }
 
         
@@ -29,7 +29,7 @@ by hope, duct tape, and CSS.
             margin-bottom: 20px;
         }
         .swiper-slide{
-            width: 220px !important;
+            width: 220px;
             height: 300px;
             border-radius: 20px;
             overflow: hidden;
@@ -67,12 +67,14 @@ by hope, duct tape, and CSS.
         <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet"><!-- This font might change someday...just like people-->
         <h1 class="text-6xl tracking-widest mb-4 text-center" style="font-family: 'Monoton', cursive; background: linear-gradient(135deg, #fff 0%, #a78bfa 50%, #818cf8 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Moodify</h1>
         <hr>
-        <p> Welcome to Moodify!</p>
-        <p>Tell us what mood you're in today:</p>
+        <link href="https://fonts.googleapis.com/css2?family=Molle:ital@1&display=swap" rel="stylesheet">
+        <p class="text-l tracking-widest mb-4 text-center" style="font-family: 'Molle', cursive;">Welcome to Moodify!</p>
+        <p class="text-xl tracking-widest mb-4 text-center" style="font-family: 'Molle', cursive;">Tell us what mood you're in today:</p>
         <input id="mood" onkeydown="if(event.key=='Enter')findMySong()" type="text" placeholder="So, what's the mood today?" class="bg-gray-800 text-white border border-white-400 rounded-lg p-3 w-72 text-center focus:outline-none focus:ring-2 focus:ring-lightpurple-400 mb-4">
         <button onclick="findMySong()" class="text-black text-sm bg-gradient-to-r from-white via-purple-300 to-indigo-400 px-4 py-2 rounded-lg hover:scale-105 hover:shadow-lg transition duration-300">Find my Song</button>
         <div id="loading" style='display:none'>
-            <p> Finding your vibe....👀</p>
+            <link href="https://fonts.googleapis.com/css2?family=Molle:ital@1&display=swap" rel="stylesheet">
+            <p class="text-xl tracking-widest mb-4 text-center" style="font-family: 'Molle', cursive;"> Finding your vibe....👀</p>
         </div>
         <div class="swiper">
             <div class="swiper-wrapper" id="cards"></div>
@@ -156,7 +158,7 @@ by hope, duct tape, and CSS.
                         {
                             slideChange(swiper) { // Change background image based on the active slide's album art
                                 document.getElementById('BG').style.backgroundImage = `url(${albumArts[swiper.activeIndex]})`;
-                                document.getElementById('BG').style.filter = 'blur(5px)';
+                                document.getElementById('BG').style.filter = 'blur(10px) brightness(0.5)'; // Apply blur and brightness effect to the background image for a more immersive experience
                             },
                             click(swiper) {
                                 swiper.slideTo(swiper.clickedIndex); // Slide to the clicked song card for better user experience}
@@ -165,6 +167,7 @@ by hope, duct tape, and CSS.
                     });
                     setTimeout(() => swiperInstance.update(), 100);
                     document.getElementById('BG').style.backgroundImage = `url(${albumArts[0]})`; // Set initial background image to the first song's album art
+                    document.getElementById('BG').style.filter = 'blur(10px) brightness(0.5)'; // Apply blur and brightness effect to the background image for a more immersive experience
                     })
             }
         </script>
