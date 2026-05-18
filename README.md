@@ -63,5 +63,7 @@ Then open `http://localhost:3000`
 - [ ] Mobile responsive layout
 - [ ] Multi-language mood input
 ---
+
+![Moodify Screenshot](screenshot.png)
  
  *Made with ❤️ · © 2026 Moodify*
