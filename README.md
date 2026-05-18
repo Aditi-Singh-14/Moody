@@ -4,6 +4,10 @@ Moodify tells you what to listen to based on your mood and not your history.
 An app that matches your vibe and gives song recommendations that always hit for whatever you're in the mood for.
 No algorithms. no "because you listened to this." just tell it how you're feeling and it gets it.
 
+## 🔗 Live Demo
+- **App:** https://moodify2026.netlify.app
+- **API:** https://moodify-ia9v.onrender.com
+
 ## Tech Stack
 - **Backend:**  FastAPI (Python)
 - **AI:** Groq API · LLaMA 3 (mood interpretation + song generation)
