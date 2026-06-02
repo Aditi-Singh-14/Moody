@@ -6,9 +6,9 @@ Say goodbye to algorithm fatigue. Moodify recommends music based on your actual 
 
 ## 🔗 Live Links
 
-Live [Web App](moodify2026.netlify.app)
+Live [Web App][https://moodify2026.netlify.app/]
 
-Production [API](moodify-ia9v.onrender.com)
+Production [API][moodify-ia9v.onrender.com]
 
 ## 🚀 How It Works & Architecture
 
@@ -138,3 +138,6 @@ Open http://localhost:3000 in your web browser to experience Moodify.
 ![Moodify Screenshot](screenshot.png)
  
 Made with ❤️ · © 2026 Moodify
+
+[https://moodify2026.netlify.app/]: moodify2026.netlify.app
+[moodify-ia9v.onrender.com]: moodify-ia9v.onrender.com
