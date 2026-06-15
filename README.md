@@ -136,6 +136,6 @@ Open http://localhost:3000 in your web browser to experience Moodify.
 [ ] Multi-Language Support: Allow LLaMA to interpret moods in Spanish, Hindi, French, and other languages.
 
 ## A Snapshot from MOODY
-![Moody Screenshot](screenshot.png)
+![Moody Screenshot](Moody_screenshot.png)
  
 Made with ❤️ · © 2026 Moody
