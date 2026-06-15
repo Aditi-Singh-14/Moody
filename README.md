@@ -12,7 +12,7 @@ Backend API: [here](https://moodify-ia9v.onrender.com)
 
 ## 🚀 How It Works & Architecture
 
-Moodify coordinates semantic AI analysis, real-time metadata lookups, and rich media state-handling in a seamless loop:
+Moody coordinates semantic AI analysis, real-time metadata lookups, and rich media state-handling in a seamless loop:
 
 ```
 [ User Input ]  --> "Feeling cozy on a rainy evening"
@@ -135,7 +135,7 @@ Open http://localhost:3000 in your web browser to experience Moodify.
 
 [ ] Multi-Language Support: Allow LLaMA to interpret moods in Spanish, Hindi, French, and other languages.
 
-## A Snapshot from MOODIFY
-![Moodify Screenshot](screenshot.png)
+## A Snapshot from MOODY
+![Moody Screenshot](screenshot.png)
  
-Made with ❤️ · © 2026 Moodify
+Made with ❤️ · © 2026 Moody
