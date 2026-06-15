@@ -1,4 +1,4 @@
-# Moodify 🎵
+# Moody 🎵
 
 Say goodbye to algorithm fatigue. Moodify recommends music based on your actual human mood in the moment (not your historical search data). Tell the app exactly how you are feeling, and watch it curate your perfect vibe.
 
