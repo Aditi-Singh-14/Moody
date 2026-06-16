@@ -6,7 +6,7 @@ Say goodbye to algorithm fatigue. Moodify recommends music based on your actual 
 
 ## 🔗 Live Links
 
-Live Web App: [here](https://moodify2026.netlify.app)
+Live Web App: [here](https://moody-2026.netlify.app)
 
 Backend API: [here](https://moodify-ia9v.onrender.com)
 
