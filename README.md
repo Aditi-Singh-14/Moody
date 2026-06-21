@@ -93,7 +93,7 @@ A Groq API Key (Get one free at console.groq.com)
 ```bash
 # Clone the repository
 git clone <your-repo-url>
-cd moodify
+cd moody
 
 # Install dependencies
 pip install -r requirements.txt
@@ -123,7 +123,7 @@ In a separate terminal window, launch a local web server from your project root:
 python3 -m http.server 3000
 ```
 
-Open http://localhost:3000 in your web browser to experience Moodify.
+Open http://localhost:3000 in your web browser to experience Moody.
 
 ### 🔮 Roadmap (v2 & Beyond)
 
