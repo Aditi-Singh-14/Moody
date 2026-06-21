@@ -1,6 +1,6 @@
 # Moody 🎵
 
-Say goodbye to algorithm fatigue. Moodify recommends music based on your actual human mood in the moment (not your historical search data). Tell the app exactly how you are feeling, and watch it curate your perfect vibe.
+Say goodbye to algorithm fatigue. Moody recommends music based on your actual human mood in the moment (not your historical search data). Tell the app exactly how you are feeling, and watch it curate your perfect vibe.
 
 (And yes, as the codebase comments suggest, this frontend is lovingly held together by hope, duct tape, and CSS).
 
